@@ -13,7 +13,11 @@ febdata <- data.table(febdata)
 
 #Let's drop the filter column
 febdata[,Date_filter:=NULL]
+
+#Let's create a datetime variable for plotting continous values against
 febdata$DateTime <- dmy_hms(paste(febdata$Date, febdata$Time),tz="America/Chicago")
+
+#Let's convert the value to numeric so that they can be plotted as the continous variable that they are
 febdata$Global_active_power <- as.numeric(febdata$Global_active_power)
 
 plot(y=febdata$Global_active_power/500, x=febdata$DateTime,type="l", xlab="", ylab="Global Active Power (kilowatts)")

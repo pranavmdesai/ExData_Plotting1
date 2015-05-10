@@ -8,6 +8,7 @@ power$Date_filter <- as.character(power$Date)
 #Let's subset the data
 febdata <- subset(power, power$Date=="1/2/2007" | power$Date=="2/2/2007")
 
+#Let's convert the active power values to numeric so that they can be plotted
 febdata$Global_active_power <- as.numeric(febdata$Global_active_power)
 
 #Let's create our histogram with the appropriate x-axis label and color for the bars

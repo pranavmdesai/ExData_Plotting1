@@ -13,12 +13,16 @@ febdata <- data.table(febdata)
 
 #Let's drop the filter column
 febdata[,Date_filter:=NULL]
+
+#Let's create a datetime variable for plotting continous values against
 febdata$DateTime <- dmy_hms(paste(febdata$Date, febdata$Time),tz="America/Chicago")
 
+#Let's convert factor values into numeric so that we can plot them
 febdata$Sub_metering_1 <- as.numeric(as.character(febdata$Sub_metering_1))
 febdata$Sub_metering_2 <- as.numeric(as.character(febdata$Sub_metering_2))
 febdata$Sub_metering_3 <- as.numeric(as.character(febdata$Sub_metering_3))
 
+#Let's create the charts
 par(mar=c(5,5,4,3)+0.1)
 plot(y=febdata$Sub_metering_1,x=febdata$DateTime, type="l", ylim=c(0,35), xlab="", ylab="Energy sub metering")
 

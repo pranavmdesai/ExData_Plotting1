@@ -13,14 +13,18 @@ febdata <- data.table(febdata)
 
 #Let's drop the filter column
 febdata[,Date_filter:=NULL]
+
+#Let's create a datetime variable for plotting continous values against
 febdata$DateTime <- dmy_hms(paste(febdata$Date, febdata$Time),tz="America/Chicago")
 
+#Let's make the different values numeric
 febdata$Sub_metering_1 <- as.numeric(as.character(febdata$Sub_metering_1))
 febdata$Sub_metering_2 <- as.numeric(as.character(febdata$Sub_metering_2))
 febdata$Sub_metering_3 <- as.numeric(as.character(febdata$Sub_metering_3))
 febdata$Global_active_power <- as.numeric(febdata$Global_active_power)
 febdata$Global_reactive_power <- as.numeric(febdata$Global_reactive_power)
 
+#Let's divide our plot area as a 2 x 2 
 par(mfrow = c(2,2))
 plot(y=febdata$Global_active_power/500, x=febdata$DateTime,type="l", xlab="", ylab="Global Active Power")
 plot(y=febdata$Voltage, x=febdata$DateTime,type="l", xlab="", ylab="Voltage")
